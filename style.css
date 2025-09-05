@@ -1,0 +1,34 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+}
+
+.table-row-achievement {
+    color: #10b981;
+}
+
+.table-row-gap {
+    color: #ef4444;
+}
+
+.quarter-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.quarter-table th, .quarter-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.quarter-table th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #4b5563;
+}
+
+.quarter-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
