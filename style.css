@@ -13,13 +13,15 @@ body {
 
 .quarter-table {
     border-collapse: collapse;
-    width: 100%;
+    width: 100%; /* Changed to 70% as requested */
+    table-layout: fixed; /* Ensures even distribution of column width */
 }
 
 .quarter-table th, .quarter-table td {
-    padding: 0.5rem;
-    text-align: left;
+    padding: 0.25rem 0.25rem;
+    text-align: center; /* Aligned content to center */
     border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
 }
 
 .quarter-table th {
@@ -36,17 +38,17 @@ body {
 /* Hierarchy Line Styles */
 .hierarchy-container {
     position: relative;
-    padding-left: 2rem; /* Matches the space for the vertical line */
+    padding-left: 2rem;
 }
 
 .hierarchy-container::before {
     content: '';
     position: absolute;
-    left: 1.5rem; /* Center the vertical line */
+    left: 1.5rem;
     top: 0;
     bottom: 0;
     width: 1px;
-    background-color: #d1d5db; /* A light gray for the line */
+    background-color: #d1d5db;
 }
 
 .hierarchy-item {
@@ -59,7 +61,7 @@ body {
     top: 50%;
     left: -0.5rem;
     transform: translateY(-50%);
-    width: 1rem; /* The length of the horizontal line */
+    width: 1rem;
     height: 1px;
     background-color: #d1d5db;
 }
@@ -67,4 +69,3 @@ body {
 .hierarchy-item:last-child::before {
     border-bottom-left-radius: 4px;
 }
-
