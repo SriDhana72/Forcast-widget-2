@@ -32,3 +32,39 @@ body {
 .quarter-table tbody tr:hover {
     background-color: #f3f4f6;
 }
+
+/* Hierarchy Line Styles */
+.hierarchy-container {
+    position: relative;
+    padding-left: 2rem; /* Matches the space for the vertical line */
+}
+
+.hierarchy-container::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem; /* Center the vertical line */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #d1d5db; /* A light gray for the line */
+}
+
+.hierarchy-item {
+    position: relative;
+}
+
+.hierarchy-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -0.5rem;
+    transform: translateY(-50%);
+    width: 1rem; /* The length of the horizontal line */
+    height: 1px;
+    background-color: #d1d5db;
+}
+
+.hierarchy-item:last-child::before {
+    border-bottom-left-radius: 4px;
+}
+

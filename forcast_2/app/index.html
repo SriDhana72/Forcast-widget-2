@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Hierarchy</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="p-6 md:p-12">
+    <div class="w-full mx-auto bg-white rounded-xl shadow-lg p-6">
+        <div class="hidden md:flex md:items-center md:justify-between font-semibold text-gray-600 border-b border-gray-200 pb-3 mb-3">
+            <div class="flex items-center gap-x-2">
+                <div class="flex-shrink-0 w-5 h-5"></div>
+                <div>Name</div>
+            </div>
+            <div class="flex items-center gap-x-3 text-right">
+                <div class="w-20">Target</div>
+                <div class="w-20">Achieved</div>
+                <div class="w-16">Gap</div>
+                <div class="w-16">Pipeline</div>
+                <div class="w-12">%</div>
+            </div>
+        </div>
+
+        <div class="space-y-2">
+            <div id="sales-head-row" class="flex items-center gap-4 p-3 rounded-lg bg-gray-50 cursor-pointer" onclick="toggleDropdown('sales-head-data', 'sales-head-arrow')">
+                <div class="flex-shrink-0">
+                    <svg id="sales-head-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                    <div class="flex flex-col">
+                        <span class="font-medium text-gray-900">Peter</span>
+                        <span class="text-sm text-gray-500">Sales Head</span>
+                    </div>
+                    <div class="flex items-center gap-x-3 text-sm">
+                        <div class="flex flex-col md:w-20 md:text-right">
+                            <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$1.1M</span>
+                        </div>
+                        <div class="flex flex-col md:w-20 md:text-right">
+                            <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$1.0M</span>
+                        </div>
+                        <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                            <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-84000</span>
+                        </div>
+                        <div class="flex flex-col md:w-16 md:text-right">
+                            <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$1.2M</span>
+                        </div>
+                        <div class="flex flex-col md:w-12 md:text-right">
+                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">92%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sales-head-data" class="hidden pl-6">
+                <div class="space-y-2">
+                    <div id="regional-peter-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('regional-peter-data', 'regional-peter-arrow')">
+                        <div class="flex-shrink-0">
+                            <svg id="regional-peter-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                        <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                             <div class="flex flex-col">
+                                <span class="font-medium text-gray-900">Logan (USA)</span>
+                                <span class="text-sm text-gray-500">Regional Manager</span>
+                            </div>
+                            <div class="flex items-center gap-x-3 text-sm">
+                                <div class="flex flex-col md:w-20 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$550.0K</span>
+                                </div>
+                                <div class="flex flex-col md:w-20 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$505.0K</span>
+                                </div>
+                                <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                                    <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-45000</span>
+                                </div>
+                                <div class="flex flex-col md:w-16 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$590.0K</span>
+                                </div>
+                                <div class="flex flex-col md:w-12 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">92%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="regional-peter-data" class="hidden pl-6">
+                        <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
+                        <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
+                            <thead>
+                                <tr>
+                                    <th>Quarter</th>
+                                    <th>Target</th>
+                                    <th>Achievement</th>
+                                    <th>Gap</th>
+                                    <th>Pipeline</th>
+                                    <th>Prediction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>$250.0K</td>
+                                    <td class="table-row-achievement">$235.0K</td>
+                                    <td class="table-row-gap">$-15000</td>
+                                    <td>$150.0K</td>
+                                    <td>$250.0K</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>$300.0K</td>
+                                    <td class="table-row-achievement">$270.0K</td>
+                                    <td class="table-row-gap">$-30000</td>
+                                    <td>$250.0K</td>
+                                    <td>$280.0K</td>
+                                </tr>
+                                <tr>
+                                    <td>Q3</td>
+                                    <td>$350.0K</td>
+                                    <td class="table-row-achievement">$330.0K</td>
+                                    <td class="table-row-gap">$-20000</td>
+                                    <td>$300.0K</td>
+                                    <td>$340.0K</td>
+                                </tr>
+                                <tr>
+                                    <td>Q4</td>
+                                    <td>$400.0K</td>
+                                    <td class="table-row-achievement">$0</td>
+                                    <td class="table-row-gap">$-400000</td>
+                                    <td>$450.0K</td>
+                                    <td>$380.0K</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2 class="text-lg font-semibold text-gray-800 my-4">Reportees</h2>
+                        <div class="space-y-2">
+                             <div id="logan-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('logan-data', 'logan-arrow')">
+                                <div class="flex-shrink-0">
+                                    <svg id="logan-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-medium text-gray-900">Binny (Canada)</span>
+                                        <span class="text-sm text-gray-500">Team Lead</span>
+                                    </div>
+                                    <div class="flex items-center gap-x-3 text-sm">
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$290.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$265.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                                            <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-25000</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$310.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-12 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">91%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="logan-data" class="hidden pl-6">
+                                <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
+                                <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
+                                    <thead>
+                                        <tr>
+                                            <th>Quarter</th>
+                                            <th>Target</th>
+                                            <th>Achievement</th>
+                                            <th>Gap</th>
+                                            <th>Pipeline</th>
+                                            <th>Prediction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>$70.0K</td>
+                                            <td class="table-row-achievement">$65.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$80.0K</td>
+                                            <td>$70.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>$80.0K</td>
+                                            <td class="table-row-achievement">$75.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$90.0K</td>
+                                            <td>$80.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>$90.0K</td>
+                                            <td class="table-row-achievement">$85.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$100.0K</td>
+                                            <td>$90.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q4</td>
+                                            <td>$100.0K</td>
+                                            <td class="table-row-achievement">$0</td>
+                                            <td class="table-row-gap">$-100000</td>
+                                            <td>$110.0K</td>
+                                            <td>$100.0K</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="jinil-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('jinil-data', 'jinil-arrow')">
+                                <div class="flex-shrink-0">
+                                    <svg id="jinil-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-medium text-gray-900">Foumin (ANZ)</span>
+                                        <span class="text-sm text-gray-500">Team Lead</span>
+                                    </div>
+                                    <div class="flex items-center gap-x-3 text-sm">
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$260.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$240.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                                            <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-20000</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$280.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-12 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">92%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="jinil-data" class="hidden pl-6">
+                                <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
+                                <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
+                                    <thead>
+                                        <tr>
+                                            <th>Quarter</th>
+                                            <th>Target</th>
+                                            <th>Achievement</th>
+                                            <th>Gap</th>
+                                            <th>Pipeline</th>
+                                            <th>Prediction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>$60.0K</td>
+                                            <td class="table-row-achievement">$55.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$70.0K</td>
+                                            <td>$65.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>$70.0K</td>
+                                            <td class="table-row-achievement">$65.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$80.0K</td>
+                                            <td>$75.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>$80.0K</td>
+                                            <td class="table-row-achievement">$75.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$90.0K</td>
+                                            <td>$85.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q4</td>
+                                            <td>$90.0K</td>
+                                            <td class="table-row-achievement">$0</td>
+                                            <td class="table-row-gap">$-90000</td>
+                                            <td>$100.0K</td>
+                                            <td>$95.0K</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="regional-foumin-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('regional-foumin-data', 'regional-foumin-arrow')">
+                        <div class="flex-shrink-0">
+                            <svg id="regional-foumin-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                         <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-gray-900">Jinil (India)</span>
+                                <span class="text-sm text-gray-500">Regional Manager</span>
+                            </div>
+                            <div class="flex items-center gap-x-3 text-sm">
+                                <div class="flex flex-col md:w-20 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$555.0K</span>
+                                </div>
+                                <div class="flex flex-col md:w-20 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$516.0K</span>
+                                </div>
+                                <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                                    <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-39000</span>
+                                </div>
+                                <div class="flex flex-col md:w-16 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$595.0K</span>
+                                </div>
+                                <div class="flex flex-col md:w-12 md:text-right">
+                                    <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">93%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="regional-foumin-data" class="hidden pl-6">
+                        <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
+                        <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
+                            <thead>
+                                <tr>
+                                    <th>Quarter</th>
+                                    <th>Target</th>
+                                    <th>Achievement</th>
+                                    <th>Gap</th>
+                                    <th>Pipeline</th>
+                                    <th>Prediction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Q1</td>
+                                    <td>$275.0K</td>
+                                    <td class="table-row-achievement">$260.0K</td>
+                                    <td class="table-row-gap">$-15000</td>
+                                    <td>$290.0K</td>
+                                    <td>$285.0K</td>
+                                </tr>
+                                <tr>
+                                    <td>Q2</td>
+                                    <td>$280.0K</td>
+                                    <td class="table-row-achievement">$256.0K</td>
+                                    <td class="table-row-gap">$-24000</td>
+                                    <td>$300.0K</td>
+                                    <td>$270.0K</td>
+                                </tr>
+                                <tr>
+                                    <td>Q3</td>
+                                    <td>$300.0K</td>
+                                    <td class="table-row-achievement">$290.0K</td>
+                                    <td class="table-row-gap">$-10000</td>
+                                    <td>$320.0K</td>
+                                    <td>$310.0K</td>
+                                </tr>
+                                <tr>
+                                    <td>Q4</td>
+                                    <td>$400.0K</td>
+                                    <td class="table-row-achievement">$0</td>
+                                    <td class="table-row-gap">$-400000</td>
+                                    <td>$450.0K</td>
+                                    <td>$400.0K</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h2 class="text-lg font-semibold text-gray-800 my-4">Reportees</h2>
+                        <div class="space-y-2">
+                            <div id="dhana-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('dhana-data', 'dhana-arrow')">
+                                <div class="flex-shrink-0">
+                                    <svg id="dhana-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-medium text-gray-900">Dhana (India North)</span>
+                                        <span class="text-sm text-gray-500">Team Lead</span>
+                                    </div>
+                                    <div class="flex items-center gap-x-3 text-sm">
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$285.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$273.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                                            <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-12000</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$305.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-12 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">96%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dhana-data" class="hidden pl-6">
+                                <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
+                                <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
+                                    <thead>
+                                        <tr>
+                                            <th>Quarter</th>
+                                            <th>Target</th>
+                                            <th>Achievement</th>
+                                            <th>Gap</th>
+                                            <th>Pipeline</th>
+                                            <th>Prediction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>$75.0K</td>
+                                            <td class="table-row-achievement">$70.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$85.0K</td>
+                                            <td>$80.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>$80.0K</td>
+                                            <td class="table-row-achievement">$75.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$90.0K</td>
+                                            <td>$85.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>$90.0K</td>
+                                            <td class="table-row-achievement">$85.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$100.0K</td>
+                                            <td>$95.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q4</td>
+                                            <td>$100.0K</td>
+                                            <td class="table-row-achievement">$0</td>
+                                            <td class="table-row-gap">$-100000</td>
+                                            <td>$110.0K</td>
+                                            <td>$105.0K</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="dhruv-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('dhruv-data', 'dhruv-arrow')">
+                                <div class="flex-shrink-0">
+                                    <svg id="dhruv-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow flex justify-between items-center md:flex-row md:justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-medium text-gray-900">Dhruv (India South)</span>
+                                        <span class="text-sm text-gray-500">Team Lead</span>
+                                    </div>
+                                    <div class="flex items-center gap-x-3 text-sm">
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Target:</span><span class="font-medium">$270.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-20 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Achieved:</span><span class="font-medium text-green-600">$243.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right text-red-500">
+                                            <span class="md:hidden font-semibold text-gray-600">Gap:</span><span class="font-medium">$-27000</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-16 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$290.0K</span>
+                                        </div>
+                                        <div class="flex flex-col md:w-12 md:text-right">
+                                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">90%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dhruv-data" class="hidden pl-6">
+                                <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
+                                <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
+                                    <thead>
+                                        <tr>
+                                            <th>Quarter</th>
+                                            <th>Target</th>
+                                            <th>Achievement</th>
+                                            <th>Gap</th>
+                                            <th>Pipeline</th>
+                                            <th>Prediction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Q1</td>
+                                            <td>$65.0K</td>
+                                            <td class="table-row-achievement">$60.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$75.0K</td>
+                                            <td>$70.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q2</td>
+                                            <td>$70.0K</td>
+                                            <td class="table-row-achievement">$65.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$80.0K</td>
+                                            <td>$75.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q3</td>
+                                            <td>$80.0K</td>
+                                            <td class="table-row-achievement">$75.0K</td>
+                                            <td class="table-row-gap">$-5000</td>
+                                            <td>$90.0K</td>
+                                            <td>$85.0K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Q4</td>
+                                            <td>$90.0K</td>
+                                            <td class="table-row-achievement">$0</td>
+                                            <td class="table-row-gap">$-90000</td>
+                                            <td>$100.0K</td>
+                                            <td>$95.0K</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

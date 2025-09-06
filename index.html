@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organization Hierarchy</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,9 +59,9 @@
                 </div>
             </div>
 
-            <div id="sales-head-data" class="hidden pl-6">
+            <div id="sales-head-data" class="hidden pl-6 hierarchy-container">
                 <div class="space-y-2">
-                    <div id="regional-peter-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('regional-peter-data', 'regional-peter-arrow')">
+                    <div id="regional-peter-row" class="hierarchy-item flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('regional-peter-data', 'regional-peter-arrow')">
                         <div class="flex-shrink-0">
                             <svg id="regional-peter-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     
-                    <div id="regional-peter-data" class="hidden pl-6">
+                    <div id="regional-peter-data" class="hidden pl-6 hierarchy-container">
                         <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
                         <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
                             <thead>
@@ -143,7 +143,7 @@
                         
                         <h2 class="text-lg font-semibold text-gray-800 my-4">Reportees</h2>
                         <div class="space-y-2">
-                             <div id="logan-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('logan-data', 'logan-arrow')">
+                             <div id="logan-row" class="hierarchy-item flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('logan-data', 'logan-arrow')">
                                 <div class="flex-shrink-0">
                                     <svg id="logan-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -223,7 +223,7 @@
                                 </table>
                             </div>
 
-                            <div id="jinil-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('jinil-data', 'jinil-arrow')">
+                            <div id="jinil-row" class="hierarchy-item flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('jinil-data', 'jinil-arrow')">
                                 <div class="flex-shrink-0">
                                     <svg id="jinil-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -305,7 +305,7 @@
                         </div>
                     </div>
 
-                    <div id="regional-foumin-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('regional-foumin-data', 'regional-foumin-arrow')">
+                    <div id="regional-foumin-row" class="hierarchy-item flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('regional-foumin-data', 'regional-foumin-arrow')">
                         <div class="flex-shrink-0">
                             <svg id="regional-foumin-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -336,7 +336,7 @@
                         </div>
                     </div>
                     
-                    <div id="regional-foumin-data" class="hidden pl-6">
+                    <div id="regional-foumin-data" class="hidden pl-6 hierarchy-container">
                         <h3 class="text-md font-semibold text-gray-800 my-4">Quarterly Summary</h3>
                         <table class="quarter-table rounded-xl overflow-hidden shadow mb-4 text-xs">
                             <thead>
@@ -387,7 +387,7 @@
                         
                         <h2 class="text-lg font-semibold text-gray-800 my-4">Reportees</h2>
                         <div class="space-y-2">
-                            <div id="dhana-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('dhana-data', 'dhana-arrow')">
+                            <div id="dhana-row" class="hierarchy-item flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('dhana-data', 'dhana-arrow')">
                                 <div class="flex-shrink-0">
                                     <svg id="dhana-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -467,7 +467,7 @@
                                 </table>
                             </div>
 
-                            <div id="dhruv-row" class="flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('dhruv-data', 'dhruv-arrow')">
+                            <div id="dhruv-row" class="hierarchy-item flex items-center gap-4 p-3 rounded-lg bg-white cursor-pointer" onclick="toggleDropdown('dhruv-data', 'dhruv-arrow')">
                                 <div class="flex-shrink-0">
                                     <svg id="dhruv-arrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transform rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -492,7 +492,7 @@
                                             <span class="md:hidden font-semibold text-gray-600">Pipeline:</span><span class="font-medium">$290.0K</span>
                                         </div>
                                         <div class="flex flex-col md:w-12 md:text-right">
-                                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-green-600">90%</span>
+                                            <span class="md:hidden font-semibold text-gray-600">%:</span><span class="font-medium text-red-500">90%</span>
                                         </div>
                                     </div>
                                 </div>
