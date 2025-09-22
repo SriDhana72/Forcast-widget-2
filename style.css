@@ -18,9 +18,9 @@ body {
 }
 
 .quarter-table th, .quarter-table td {
-    padding: 0.25rem 0.25rem;
+    padding: 0.625rem 0.25rem;
     text-align: center;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #f3f4f6;
     white-space: nowrap;
 }
 
@@ -32,52 +32,48 @@ body {
 }
 
 .quarter-table tbody tr:hover {
-    background-color: #f9fafb; /* Lighter gray, equivalent to Tailwind's gray-50 */
+    background-color: #f9fafb;
 }
 
-/* Hierarchy Line Styles */
 .hierarchy-container {
     position: relative;
-    padding-left: 1.5rem; /* Adjusted padding */
+    padding-left: 1.5rem;
 }
 
 .hierarchy-item {
     position: relative;
-    padding-left: 1rem; /* Add space between line and content */
+    padding-left: 1rem;
 }
 
-/* Horizontal line `─` */
 .hierarchy-item::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 0;
-    height: 2px;
+    height: 1px;
     width: 1rem;
     background-color: #d1d5db;
-    transform: translateY(-1px); /* Center the 2px line */
+    transform: translateY(-1px);
 }
 
-/* Vertical line `│` */
 .hierarchy-item::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 2px;
+    width: 1px;
     height: 100%;
     background-color: #d1d5db;
 }
 
-/* For the last child, the vertical line stops at the elbow */
 .hierarchy-item:last-child::after {
     height: 50%;
 }
 
 .filter-button-group button.active {
-    background-color: white;
+    background-color: #f3f4f6; /* Lighter grey for active button */
     color: #1f2937;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    box-shadow: none;
 }
 .filter-button-group button {
     color: #4b5563;
