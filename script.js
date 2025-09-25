@@ -11,87 +11,114 @@ function toggleDropdown(dataId, arrowId, event) {
     }
 }
 
+function toggleMultiSelect(dropdownId, event) {
+    event.stopPropagation();
+    const allDropdowns = document.querySelectorAll('.multi-select-dropdown');
+    allDropdowns.forEach(d => {
+        if (d.id !== dropdownId) {
+            d.classList.add('hidden');
+        }
+    });
+    const dropdown = document.getElementById(dropdownId);
+    dropdown.classList.toggle('hidden');
+}
+
+function updateFilterText(filterTextId, dropdownId, defaultText) {
+    const dropdown = document.getElementById(dropdownId);
+    const filterTextElement = document.getElementById(filterTextId);
+    const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
+    const totalCheckboxes = dropdown.querySelectorAll('input[type="checkbox"]').length;
+    
+    if (checkboxes.length === 0 || checkboxes.length === totalCheckboxes) {
+        filterTextElement.textContent = defaultText;
+    } else {
+        const selectedValues = Array.from(checkboxes).map(cb => cb.value);
+        filterTextElement.textContent = selectedValues.join(', ');
+    }
+}
+
+
 let currentGlobalFilter = 'all';
 
 const summaryData = {
     peter: {
         target:    { all: '$1.92M',   my_target: '$400K', my_team: '$1.52M' },
-        achieved:  { all: '$1.02M',   my_target: '$380K', my_team: '$640K' },
-        gap:       { all: '-$900K',   my_target: '-$20K', my_team: '-$880K' },
-        percentage:{ all: '53%',     my_target: '95%',   my_team: '42%' }
+        achieved:  { all: '$1.50M',   my_target: '$288K', my_team: '$1.21M' },
+        gap:       { all: '-$420K',   my_target: '-$112K', my_team: '-$308K' },
+        percentage:{ all: '78%',     my_target: '72%',   my_team: '80%' }
     },
     logan: {
         target:    { all: '$750.0K', my_target: '$200K', my_team: '$550.0K' },
-        achieved:  { all: '$505.0K', my_target: '$195K', my_team: '$310.0K' },
-        gap:       { all: '-$245K',   my_target: '-$5K',  my_team: '-$240K' },
-        percentage:{ all: '67%',     my_target: '98%',   my_team: '56%' }
+        achieved:  { all: '$525.0K', my_target: '$145K', my_team: '$380.0K' },
+        gap:       { all: '-$225K',   my_target: '-$55K',  my_team: '-$170K' },
+        percentage:{ all: '70%',     my_target: '73%',   my_team: '69%' }
     },
     jinil: {
         target:    { all: '$765.0K', my_target: '$210K', my_team: '$555.0K' },
-        achieved:  { all: '$516.0K', my_target: '$205K', my_team: '$311.0K' },
-        gap:       { all: '-$249K',   my_target: '-$5K',  my_team: '-$244K' },
-        percentage:{ all: '67%',     my_target: '98%',   my_team: '56%' }
+        achieved:  { all: '$550.0K', my_target: '$152K', my_team: '$398.0K' },
+        gap:       { all: '-$215K',   my_target: '-$58K',  my_team: '-$157K' },
+        percentage:{ all: '72%',     my_target: '72%',   my_team: '72%' }
     },
     binny: {
         target:    { all: '$290.0K', my_target: '$290.0K', my_team: '$0' },
-        achieved:  { all: '$265.0K', my_target: '$265.0K', my_team: '$0' },
-        gap:       { all: '-$25K',   my_target: '-$25K',   my_team: '$0' },
-        percentage:{ all: '91%',     my_target: '91%',     my_team: 'N/A' }
+        achieved:  { all: '$210.0K', my_target: '$210.0K', my_team: '$0' },
+        gap:       { all: '-$80K',   my_target: '-$80K',   my_team: '$0' },
+        percentage:{ all: '72%',     my_target: '72%',     my_team: 'N/A' }
     },
     foumin: {
         target:    { all: '$260.0K', my_target: '$260.0K', my_team: '$0' },
-        achieved:  { all: '$240.0K', my_target: '$240.0K', my_team: '$0' },
-        gap:       { all: '-$20K',   my_target: '-$20K',   my_team: '$0' },
-        percentage:{ all: '92%',     my_target: '92%',     my_team: 'N/A' }
+        achieved:  { all: '$188.0K', my_target: '$188.0K', my_team: '$0' },
+        gap:       { all: '-$72K',   my_target: '-$72K',   my_team: '$0' },
+        percentage:{ all: '72%',     my_target: '72%',     my_team: 'N/A' }
     },
     dhana: {
         target:    { all: '$285.0K', my_target: '$285.0K', my_team: '$0' },
-        achieved:  { all: '$273.0K', my_target: '$273.0K', my_team: '$0' },
-        gap:       { all: '-$12K',   my_target: '-$12K',   my_team: '$0' },
-        percentage:{ all: '96%',     my_target: '96%',     my_team: 'N/A' }
+        achieved:  { all: '$218.0K', my_target: '$218.0K', my_team: '$0' },
+        gap:       { all: '-$67K',   my_target: '-$67K',   my_team: '$0' },
+        percentage:{ all: '76%',     my_target: '76%',     my_team: 'N/A' }
     },
     dhruv: {
         target:    { all: '$270.0K', my_target: '$270.0K', my_team: '$0' },
-        achieved:  { all: '$243.0K', my_target: '$243.0K', my_team: '$0' },
-        gap:       { all: '-$27K',   my_target: '-$27K',   my_team: '$0' },
-        percentage:{ all: '90%',     my_target: '90%',     my_team: 'N/A' }
+        achieved:  { all: '$193.0K', my_target: '$193.0K', my_team: '$0' },
+        gap:       { all: '-$77K',   my_target: '-$77K',   my_team: '$0' },
+        percentage:{ all: '71%',     my_target: '71%',     my_team: 'N/A' }
     }
 };
 
 const quarterlyData = {
     peter: {
-        all: [{ q: 'Q1', target: '$450K', achievement: '$420K', gap: '-$30K', pipeline: '$500K', prediction: '$480K', percentage: '93%' },{ q: 'Q2', target: '$480K', achievement: '$450K', gap: '-$30K', pipeline: '$550K', prediction: '$500K', percentage: '94%' },{ q: 'Q3', target: '$500K', achievement: '$0',    gap: '-$500K', pipeline: '$600K', prediction: '$520K', percentage: '0%' },{ q: 'Q4', target: '$500K', achievement: '$0',    gap: '-$500K', pipeline: '$650K', prediction: '$550K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$100K', achievement: '$95K', gap: '-$5K', pipeline: '$120K', prediction: '$110K', percentage: '95%' },{ q: 'Q2', target: '$100K', achievement: '$98K', gap: '-$2K', pipeline: '$130K', prediction: '$115K', percentage: '98%' },{ q: 'Q3', target: '$100K', achievement: '$0',   gap: '-$100K', pipeline: '$140K', prediction: '$120K', percentage: '0%' },{ q: 'Q4', target: '$100K', achievement: '$0',   gap: '-$100K', pipeline: '$150K', prediction: '$125K', percentage: '0%' }],
-        my_team: [{ q: 'Q1', target: '$350K', achievement: '$325K', gap: '-$25K', pipeline: '$380K', prediction: '$370K', percentage: '93%' },{ q: 'Q2', target: '$380K', achievement: '$352K', gap: '-$28K', pipeline: '$420K', prediction: '$385K', percentage: '93%' },{ q: 'Q3', target: '$400K', achievement: '$0',    gap: '-$400K', pipeline: '$460K', prediction: '$400K', percentage: '0%' },{ q: 'Q4', target: '$400K', achievement: '$0',    gap: '-$400K', pipeline: '$500K', prediction: '$425K', percentage: '0%' }]
+        all: [{ q: 'Q1', target: '$450K', achievement: '$420K', gap: '-$30K', pipeline: '$500K', prediction: '$480K', percentage: '93%' },{ q: 'Q2', target: '$480K', achievement: '$450K', gap: '-$30K', pipeline: '$550K', prediction: '$500K', percentage: '94%' },{ q: 'Q3', target: '$500K', achievement: '$480K', gap: '-$20K', pipeline: '$600K', prediction: '$520K', percentage: '96%' },{ q: 'Q4', target: '$500K', achievement: '$0',    gap: '-$500K', pipeline: '$650K', prediction: '$550K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$100K', achievement: '$95K', gap: '-$5K', pipeline: '$120K', prediction: '$110K', percentage: '95%' },{ q: 'Q2', target: '$100K', achievement: '$98K', gap: '-$2K', pipeline: '$130K', prediction: '$115K', percentage: '98%' },{ q: 'Q3', target: '$100K', achievement: '$95K',   gap: '-$5K', pipeline: '$140K', prediction: '$120K', percentage: '95%' },{ q: 'Q4', target: '$100K', achievement: '$0',   gap: '-$100K', pipeline: '$150K', prediction: '$125K', percentage: '0%' }],
+        my_team: [{ q: 'Q1', target: '$350K', achievement: '$325K', gap: '-$25K', pipeline: '$380K', prediction: '$370K', percentage: '93%' },{ q: 'Q2', target: '$380K', achievement: '$352K', gap: '-$28K', pipeline: '$420K', prediction: '$385K', percentage: '93%' },{ q: 'Q3', target: '$400K', achievement: '$385K',    gap: '-$15K', pipeline: '$460K', prediction: '$400K', percentage: '96%' },{ q: 'Q4', target: '$400K', achievement: '$0',    gap: '-$400K', pipeline: '$500K', prediction: '$425K', percentage: '0%' }]
     },
     logan: {
-        all: [{ q: 'Q1', target: '$180K', achievement: '$170K', gap: '-$10K', pipeline: '$200K', prediction: '$190K', percentage: '94%' },{ q: 'Q2', target: '$185K', achievement: '$175K', gap: '-$10K', pipeline: '$210K', prediction: '$195K', percentage: '95%' },{ q: 'Q3', target: '$190K', achievement: '$0',    gap: '-$190K', pipeline: '$220K', prediction: '$200K', percentage: '0%' },{ q: 'Q4', target: '$195K', achievement: '$0',    gap: '-$195K', pipeline: '$230K', prediction: '$205K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$50K', achievement: '$48K', gap: '-$2K', pipeline: '$60K', prediction: '$55K', percentage: '96%' },{ q: 'Q2', target: '$50K', achievement: '$49K', gap: '-$1K', pipeline: '$65K', prediction: '$58K', percentage: '98%' },{ q: 'Q3', target: '$50K', achievement: '$0',   gap: '-$50K', pipeline: '$70K', prediction: '$60K', percentage: '0%' },{ q: 'Q4', target: '$50K', achievement: '$0',   gap: '-$50K', pipeline: '$75K', prediction: '$62K', percentage: '0%' }],
-        my_team: [{ q: 'Q1', target: '$130K', achievement: '$122K', gap: '-$8K', pipeline: '$140K', prediction: '$135K', percentage: '94%' },{ q: 'Q2', target: '$135K', achievement: '$126K', gap: '-$9K', pipeline: '$145K', prediction: '$137K', percentage: '93%' },{ q: 'Q3', target: '$140K', achievement: '$0',    gap: '-$140K', pipeline: '$150K', prediction: '$140K', percentage: '0%' },{ q: 'Q4', target: '$145K', achievement: '$0',    gap: '-$145K', pipeline: '$155K', prediction: '$143K', percentage: '0%' }]
+        all: [{ q: 'Q1', target: '$180K', achievement: '$170K', gap: '-$10K', pipeline: '$200K', prediction: '$190K', percentage: '94%' },{ q: 'Q2', target: '$185K', achievement: '$175K', gap: '-$10K', pipeline: '$210K', prediction: '$195K', percentage: '95%' },{ q: 'Q3', target: '$190K', achievement: '$180K',    gap: '-$10K', pipeline: '$220K', prediction: '$200K', percentage: '95%' },{ q: 'Q4', target: '$195K', achievement: '$0',    gap: '-$195K', pipeline: '$230K', prediction: '$205K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$50K', achievement: '$48K', gap: '-$2K', pipeline: '$60K', prediction: '$55K', percentage: '96%' },{ q: 'Q2', target: '$50K', achievement: '$49K', gap: '-$1K', pipeline: '$65K', prediction: '$58K', percentage: '98%' },{ q: 'Q3', target: '$50K', achievement: '$48K',   gap: '-$2K', pipeline: '$70K', prediction: '$60K', percentage: '96%' },{ q: 'Q4', target: '$50K', achievement: '$0',   gap: '-$50K', pipeline: '$75K', prediction: '$62K', percentage: '0%' }],
+        my_team: [{ q: 'Q1', target: '$130K', achievement: '$122K', gap: '-$8K', pipeline: '$140K', prediction: '$135K', percentage: '94%' },{ q: 'Q2', target: '$135K', achievement: '$126K', gap: '-$9K', pipeline: '$145K', prediction: '$137K', percentage: '93%' },{ q: 'Q3', target: '$140K', achievement: '$132K',    gap: '-$8K', pipeline: '$150K', prediction: '$140K', percentage: '94%' },{ q: 'Q4', target: '$145K', achievement: '$0',    gap: '-$145K', pipeline: '$155K', prediction: '$143K', percentage: '0%' }]
     },
     jinil: {
-         all: [{ q: 'Q1', target: '$185K', achievement: '$178K', gap: '-$7K', pipeline: '$200K', prediction: '$195K', percentage: '96%' },{ q: 'Q2', target: '$190K', achievement: '$182K', gap: '-$8K', pipeline: '$210K', prediction: '$200K', percentage: '96%' },{ q: 'Q3', target: '$195K', achievement: '$0',    gap: '-$195K', pipeline: '$220K', prediction: '$210K', percentage: '0%' },{ q: 'Q4', target: '$195K', achievement: '$0',    gap: '-$195K', pipeline: '$230K', prediction: '$215K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$50K', achievement: '$49K', gap: '-$1K', pipeline: '$60K', prediction: '$58K', percentage: '98%' },{ q: 'Q2', target: '$50K', achievement: '$49K', gap: '-$1K', pipeline: '$65K', prediction: '$60K', percentage: '98%' },{ q: 'Q3', target: '$55K', achievement: '$0',   gap: '-$55K', pipeline: '$70K', prediction: '$65K', percentage: '0%' },{ q: 'Q4', target: '$55K', achievement: '$0',   gap: '-$55K', pipeline: '$75K', prediction: '$68K', percentage: '0%' }],
-        my_team: [{ q: 'Q1', target: '$135K', achievement: '$129K', gap: '-$6K', pipeline: '$140K', prediction: '$137K', percentage: '96%' },{ q: 'Q2', target: '$140K', achievement: '$133K', gap: '-$7K', pipeline: '$145K', prediction: '$140K', percentage: '95%' },{ q: 'Q3', target: '$140K', achievement: '$0',    gap: '-$140K', pipeline: '$150K', prediction: '$145K', percentage: '0%' },{ q: 'Q4', target: '$140K', achievement: '$0',    gap: '-$140K', pipeline: '$155K', prediction: '$147K', percentage: '0%' }]
+         all: [{ q: 'Q1', target: '$185K', achievement: '$178K', gap: '-$7K', pipeline: '$200K', prediction: '$195K', percentage: '96%' },{ q: 'Q2', target: '$190K', achievement: '$182K', gap: '-$8K', pipeline: '$210K', prediction: '$200K', percentage: '96%' },{ q: 'Q3', target: '$195K', achievement: '$190K',    gap: '-$5K', pipeline: '$220K', prediction: '$210K', percentage: '97%' },{ q: 'Q4', target: '$195K', achievement: '$0',    gap: '-$195K', pipeline: '$230K', prediction: '$215K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$50K', achievement: '$49K', gap: '-$1K', pipeline: '$60K', prediction: '$58K', percentage: '98%' },{ q: 'Q2', target: '$50K', achievement: '$49K', gap: '-$1K', pipeline: '$65K', prediction: '$60K', percentage: '98%' },{ q: 'Q3', target: '$55K', achievement: '$54K',   gap: '-$1K', pipeline: '$70K', prediction: '$65K', percentage: '98%' },{ q: 'Q4', target: '$55K', achievement: '$0',   gap: '-$55K', pipeline: '$75K', prediction: '$68K', percentage: '0%' }],
+        my_team: [{ q: 'Q1', target: '$135K', achievement: '$129K', gap: '-$6K', pipeline: '$140K', prediction: '$137K', percentage: '96%' },{ q: 'Q2', target: '$140K', achievement: '$133K', gap: '-$7K', pipeline: '$145K', prediction: '$140K', percentage: '95%' },{ q: 'Q3', target: '$140K', achievement: '$136K',    gap: '-$4K', pipeline: '$150K', prediction: '$145K', percentage: '97%' },{ q: 'Q4', target: '$140K', achievement: '$0',    gap: '-$140K', pipeline: '$155K', prediction: '$147K', percentage: '0%' }]
     },
     binny: {
-        all: [{ q: 'Q1', target: '$70K', achievement: '$65K', gap: '-$5K', pipeline: '$80K', prediction: '$75K', percentage: '93%' },{ q: 'Q2', target: '$75K', achievement: '$70K', gap: '-$5K', pipeline: '$85K', prediction: '$80K', percentage: '93%' },{ q: 'Q3', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$70K', achievement: '$65K', gap: '-$5K', pipeline: '$80K', prediction: '$75K', percentage: '93%' },{ q: 'Q2', target: '$75K', achievement: '$70K', gap: '-$5K', pipeline: '$85K', prediction: '$80K', percentage: '93%' },{ q: 'Q3', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
+        all: [{ q: 'Q1', target: '$70K', achievement: '$65K', gap: '-$5K', pipeline: '$80K', prediction: '$75K', percentage: '93%' },{ q: 'Q2', target: '$75K', achievement: '$70K', gap: '-$5K', pipeline: '$85K', prediction: '$80K', percentage: '93%' },{ q: 'Q3', target: '$80K', achievement: '$75K', gap: '-$5K', pipeline: '$90K', prediction: '$85K', percentage: '94%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$70K', achievement: '$65K', gap: '-$5K', pipeline: '$80K', prediction: '$75K', percentage: '93%' },{ q: 'Q2', target: '$75K', achievement: '$70K', gap: '-$5K', pipeline: '$85K', prediction: '$80K', percentage: '93%' },{ q: 'Q3', target: '$80K', achievement: '$75K', gap: '-$5K', pipeline: '$90K', prediction: '$85K', percentage: '94%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
         my_team: []
     },
     foumin: {
-        all: [{ q: 'Q1', target: '$60K', achievement: '$58K', gap: '-$2K', pipeline: '$70K', prediction: '$65K', percentage: '97%' },{ q: 'Q2', target: '$65K', achievement: '$62K', gap: '-$3K', pipeline: '$75K', prediction: '$70K', percentage: '95%' },{ q: 'Q3', target: '$70K', achievement: '$0', gap: '-$70K', pipeline: '$80K', prediction: '$75K', percentage: '0%' },{ q: 'Q4', target: '$75K', achievement: '$0', gap: '-$75K', pipeline: '$85K', prediction: '$80K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$60K', achievement: '$58K', gap: '-$2K', pipeline: '$70K', prediction: '$65K', percentage: '97%' },{ q: 'Q2', target: '$65K', achievement: '$62K', gap: '-$3K', pipeline: '$75K', prediction: '$70K', percentage: '95%' },{ q: 'Q3', target: '$70K', achievement: '$0', gap: '-$70K', pipeline: '$80K', prediction: '$75K', percentage: '0%' },{ q: 'Q4', target: '$75K', achievement: '$0', gap: '-$75K', pipeline: '$85K', prediction: '$80K', percentage: '0%' }],
+        all: [{ q: 'Q1', target: '$60K', achievement: '$58K', gap: '-$2K', pipeline: '$70K', prediction: '$65K', percentage: '97%' },{ q: 'Q2', target: '$65K', achievement: '$62K', gap: '-$3K', pipeline: '$75K', prediction: '$70K', percentage: '95%' },{ q: 'Q3', target: '$70K', achievement: '$68K', gap: '-$2K', pipeline: '$80K', prediction: '$75K', percentage: '97%' },{ q: 'Q4', target: '$75K', achievement: '$0', gap: '-$75K', pipeline: '$85K', prediction: '$80K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$60K', achievement: '$58K', gap: '-$2K', pipeline: '$70K', prediction: '$65K', percentage: '97%' },{ q: 'Q2', target: '$65K', achievement: '$62K', gap: '-$3K', pipeline: '$75K', prediction: '$70K', percentage: '95%' },{ q: 'Q3', target: '$70K', achievement: '$68K', gap: '-$2K', pipeline: '$80K', prediction: '$75K', percentage: '97%' },{ q: 'Q4', target: '$75K', achievement: '$0', gap: '-$75K', pipeline: '$85K', prediction: '$80K', percentage: '0%' }],
         my_team: []
     },
     dhana: {
-        all: [{ q: 'Q1', target: '$70K', achievement: '$68K', gap: '-$2K', pipeline: '$80K', prediction: '$75K', percentage: '97%' },{ q: 'Q2', target: '$75K', achievement: '$72K', gap: '-$3K', pipeline: '$85K', prediction: '$80K', percentage: '96%' },{ q: 'Q3', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$70K', achievement: '$68K', gap: '-$2K', pipeline: '$80K', prediction: '$75K', percentage: '97%' },{ q: 'Q2', target: '$75K', achievement: '$72K', gap: '-$3K', pipeline: '$85K', prediction: '$80K', percentage: '96%' },{ q: 'Q3', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
+        all: [{ q: 'Q1', target: '$70K', achievement: '$68K', gap: '-$2K', pipeline: '$80K', prediction: '$75K', percentage: '97%' },{ q: 'Q2', target: '$75K', achievement: '$72K', gap: '-$3K', pipeline: '$85K', prediction: '$80K', percentage: '96%' },{ q: 'Q3', target: '$80K', achievement: '$78K', gap: '-$2K', pipeline: '$90K', prediction: '$85K', percentage: '98%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$70K', achievement: '$68K', gap: '-$2K', pipeline: '$80K', prediction: '$75K', percentage: '97%' },{ q: 'Q2', target: '$75K', achievement: '$72K', gap: '-$3K', pipeline: '$85K', prediction: '$80K', percentage: '96%' },{ q: 'Q3', target: '$80K', achievement: '$78K', gap: '-$2K', pipeline: '$90K', prediction: '$85K', percentage: '98%' },{ q: 'Q4', target: '$85K', achievement: '$0', gap: '-$85K', pipeline: '$95K', prediction: '$90K', percentage: '0%' }],
         my_team: []
     },
     dhruv: {
-        all: [{ q: 'Q1', target: '$65K', achievement: '$60K', gap: '-$5K', pipeline: '$75K', prediction: '$70K', percentage: '92%' },{ q: 'Q2', target: '$70K', achievement: '$63K', gap: '-$7K', pipeline: '$80K', prediction: '$72K', percentage: '90%' },{ q: 'Q3', target: '$75K', achievement: '$0', gap: '-$75K', pipeline: '$85K', prediction: '$80K', percentage: '0%' },{ q: 'Q4', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' }],
-        my_target: [{ q: 'Q1', target: '$65K', achievement: '$60K', gap: '-$5K', pipeline: '$75K', prediction: '$70K', percentage: '92%' },{ q: 'Q2', target: '$70K', achievement: '$63K', gap: '-$7K', pipeline: '$80K', prediction: '$72K', percentage: '90%' },{ q: 'Q3', target: '$75K', achievement: '$0', gap: '-$75K', pipeline: '$85K', prediction: '$80K', percentage: '0%' },{ q: 'Q4', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' }],
+        all: [{ q: 'Q1', target: '$65K', achievement: '$60K', gap: '-$5K', pipeline: '$75K', prediction: '$70K', percentage: '92%' },{ q: 'Q2', target: '$70K', achievement: '$63K', gap: '-$7K', pipeline: '$80K', prediction: '$72K', percentage: '90%' },{ q: 'Q3', target: '$75K', achievement: '$70K', gap: '-$5K', pipeline: '$85K', prediction: '$80K', percentage: '93%' },{ q: 'Q4', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' }],
+        my_target: [{ q: 'Q1', target: '$65K', achievement: '$60K', gap: '-$5K', pipeline: '$75K', prediction: '$70K', percentage: '92%' },{ q: 'Q2', target: '$70K', achievement: '$63K', gap: '-$7K', pipeline: '$80K', prediction: '$72K', percentage: '90%' },{ q: 'Q3', target: '$75K', achievement: '$70K', gap: '-$5K', pipeline: '$85K', prediction: '$80K', percentage: '93%' },{ q: 'Q4', target: '$80K', achievement: '$0', gap: '-$80K', pipeline: '$90K', prediction: '$85K', percentage: '0%' }],
         my_team: []
     }
 };
@@ -154,8 +181,35 @@ function setIndividualFilter(person, filterType, element) {
 
 document.addEventListener('DOMContentLoaded', () => {
     setGlobalFilter('all', document.querySelector('#global-filter-container button'));
+
+    const buDropdown = document.getElementById('bu-dropdown');
+    if (buDropdown) {
+        buDropdown.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateFilterText('bu-filter-text', 'bu-dropdown', 'All BU');
+            });
+        });
+    }
+
+    const regionDropdown = document.getElementById('region-dropdown');
+    if(regionDropdown) {
+        regionDropdown.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateFilterText('region-filter-text', 'region-dropdown', 'All Regions');
+            });
+        });
+    }
+
+     // ZOHO.embeddedApp.onReady(function() { ZOHO.CRM.UI.Resize({ height: "100%", width: "100%" }); });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    // ZOHO.embeddedApp.onReady(function() { ZOHO.CRM.UI.Resize({ height: "100%", width: "100%" }); });
+window.addEventListener('click', function(e) {
+    if (!e.target.closest('#bu-filter')) {
+        const buDropdown = document.getElementById('bu-dropdown');
+        if (buDropdown) buDropdown.classList.add('hidden');
+    }
+    if (!e.target.closest('#region-filter')) {
+         const regionDropdown = document.getElementById('region-dropdown');
+        if (regionDropdown) regionDropdown.classList.add('hidden');
+    }
 });
